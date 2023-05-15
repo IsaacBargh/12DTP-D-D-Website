@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{title}}</title>
+</head>
+<body>
+    <header>
+        {% include "header.html" %}
+    </header>
+    <nav>
+        {% include "nav.html" %}
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <h3>&copy;2023 Isaac Bargh</h3>
+    </footer>
+</body>
+</html>
