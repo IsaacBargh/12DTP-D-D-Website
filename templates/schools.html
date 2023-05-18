@@ -1,9 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
 {%for item in results%}
-<p>{{item[3]}}</p>
 <h3>
-    <a href= "/class/{{item[0]}}">
+    <a href= "/spells/{{item[0]}}">
     {{item[1]}}
     </a>
 </h3>

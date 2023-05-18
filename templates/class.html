@@ -3,8 +3,23 @@
 <a href= "/all_classes">
     <--Back
 </a>
-<p> {{group}}  </p>
-<p> {{proficiency}}  </p>
-<p> {{feature}}  </p>
-<p> {{spell}}  </p>
+<H1>{{group[1]}}</H1>
+<p>{{group[2]}}</p>
+<p>{{group[3]}}</p>
+
+<H3>Proficiencies</H3>
+{%for item in proficiency%}
+<p> {{item[0]}}  </p>
+{%endfor%}
+
+<H3>Features</H3>
+{%for item in feature%}
+<p> {{item[0]}}  </p>
+{%endfor%}
+
+<H3>Spells</H3>
+{%for item in spell%}
+<p> {{item[0]}}  </p>
+{%endfor%}
+
 {% endblock %}

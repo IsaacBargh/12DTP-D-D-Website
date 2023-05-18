@@ -1,11 +1,14 @@
 {% extends 'layout.html' %}
 {% block content %}
-{%for item in results%}
-<p>{{item[3]}}</p>
+<a href= "/schools">
+    <--Back
+</a>
+<H1> {{school[1]}}  </H1>
+<p> {{school[2]}}  </p>
+
+{%for item in spell%}
 <h3>
-    <a href= "/class/{{item[0]}}">
     {{item[1]}}
-    </a>
 </h3>
 <P>{{item[2]}}</P>
 {%endfor%}

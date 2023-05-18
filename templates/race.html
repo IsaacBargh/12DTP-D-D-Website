@@ -3,6 +3,14 @@
 <a href= "/all_races">
     <--Back
 </a>
-<p> {{race}}  </p>
-<p> {{feature}}  </p>
+<H1>{{race[1]}}</H1>
+<p>{{race[2]}}</p>
+<p>{{race[3]}}</p>
+
+
+<H3>Features</H3>
+{%for item in feature%}
+<p> {{item[0]}}  </p>
+{%endfor%}
+
 {% endblock %}

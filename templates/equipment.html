@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block content %}
+<a href= "/all_equipment">
+    <--Back
+</a>
+<H1>{{results[1]}}</H1>
+<p>{{results[2]}}</p>
+<p>{{results[4]}}</p>
+
+<H3>Category</H3>
+{%for item in category%}
+<p> {{item[0]}}  </p>
+{%endfor%}
+
+
+{% endblock %}

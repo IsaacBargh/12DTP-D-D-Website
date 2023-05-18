@@ -51,6 +51,43 @@ def race(id):
     feature = cur.fetchall() 
     return render_template("race.html",title="Race",race=race, feature=feature)
 
+@app.route('/all_equipment')
+def all_equipment():
+    conn = sqlite3.connect('DnD.db') 
+    cur = conn.cursor() 
+    cur.execute('SELECT * FROM Equipment') 
+    results = cur.fetchall() 
+    return render_template("all_equipment.html",title="Equipment-List",results=results)
+
+
+@app.route('/equipment/<int:id>')
+def equipment(id):
+    conn = sqlite3.connect('DnD.db') 
+    cur = conn.cursor() 
+    cur.execute('SELECT * FROM Equipment WHERE id=?',(id,)) 
+    results = cur.fetchone()
+    cur.execute('SELECT name FROM EquipmentCategory WHERE id =(SELECT Category FROM Equipment WHERE id=?)',(id,))
+    category= cur.fetchall() 
+    return render_template("equipment.html",title="Equipment",results=results, category=category)
+
+@app.route('/schools')
+def schools():
+    conn = sqlite3.connect('DnD.db') 
+    cur = conn.cursor() 
+    cur.execute('SELECT * FROM School') 
+    results = cur.fetchall() 
+    return render_template("schools.html",title="Spell-Schools",results=results)
+
+@app.route('/spells/<int:id>')
+def spells(id): 
+    conn = sqlite3.connect('DnD.db') 
+    cur = conn.cursor() 
+    cur.execute('SELECT * FROM Spell WHERE school=?',(id,)) 
+    spell = cur.fetchall() 
+    cur.execute('SELECT * FROM School WHERE id=?',(id,)) 
+    school = cur.fetchone()
+    return render_template("spells.html",title="Spells",school=school,spell=spell)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
