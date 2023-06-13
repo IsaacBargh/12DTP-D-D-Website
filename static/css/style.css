@@ -1,0 +1,48 @@
+/* Global */
+
+body{
+    font-family:"Comic Sans MS";
+    background-color: lightgray;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;  
+}
+
+html{
+    background-image: linear-gradient(to left, rgb(212, 26, 26), rgb(92, 7, 7));
+}
+
+header{
+    background-color: gray;
+    padding: 1px 0px;
+    font-family: fantasy;
+    text-align: center;
+    color: firebrick;
+    font-weight: bolder;
+    font-size: 50px;
+}
+
+nav{
+    text-align: center;
+}
+
+.nav_link{
+    color: Black
+}
+
+.all_link{
+    color: Black
+}
+
+footer{
+    background-color: gray;
+    font-family: 'Lucida Sans';
+}
+
+main{
+    margin-top: 20px;
+    margin-bottom: 50px;    
+    margin-right: 30px;
+    margin-left: 30px;
+}
