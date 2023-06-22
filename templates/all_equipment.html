@@ -1,12 +1,21 @@
 {% extends 'layout.html' %}
 {% block content %}
 {%for item in results%}
-<p>{{item[4]}}</p>
+<img src="/{{item[4]}}">
+<br>
+<br>
 <h3>
     <a class="all_link" href= "/equipment/{{item[0]}}">
     {{item[1]}}
     </a>
 </h3>
 <P>{{item[2]}}</P>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 {%endfor%}
 {% endblock %}

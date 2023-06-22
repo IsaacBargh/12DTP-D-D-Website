@@ -5,17 +5,20 @@ import sqlite3
 #Create App
 app = Flask(__name__)
 
-#Create Home page
+
+# Create Home page
 @app.route('/')
 def home():
     return render_template("home.html",title="Home")
 
-#Create Rules page
+
+# Create Rules page
 @app.route('/rules')
 def rules():
     return render_template("rules.html",title="Rules")
 
-#Create All_Classess page grabs information from Class table
+
+# Create All_Classess page grabs information from Class table
 @app.route('/all_classes')
 def all_classes():
     conn = sqlite3.connect('DnD.db')   
@@ -24,7 +27,8 @@ def all_classes():
     results = cur.fetchall()
     return render_template("all_classes.html",title="Class",results=results)
 
-#Create Class page grabs information from Class,EquipmentCategory,Feature and spell table
+
+# Create Class page grabs information from Class,EquipmentCategory,Feature and spell table
 @app.route('/class/<int:id>')
 def group(id):
     conn = sqlite3.connect('DnD.db')   
@@ -39,7 +43,8 @@ def group(id):
     spell= cur.fetchall() 
     return render_template('class.html',title=group[1],group=group, proficiency=proficiency, feature=feature, spell=spell)
 
-#Create All_Races page grabs information from Race table
+
+# Create All_Races page grabs information from Race table
 @app.route('/all_races')
 def all_races():
     conn = sqlite3.connect('DnD.db')
@@ -48,7 +53,8 @@ def all_races():
     results = cur.fetchall()
     return render_template("all_races.html",title="Race",results=results)
 
-#Create Race page grabs information from Race and Feature table
+
+# Create Race page grabs information from Race and Feature table
 @app.route('/race/<int:id>') 
 def race(id): 
     conn = sqlite3.connect('DnD.db') 
@@ -59,7 +65,8 @@ def race(id):
     feature = cur.fetchall() 
     return render_template("race.html",title=race[1],race=race, feature=feature)
 
-#Create All_Equipment page grabs information from Equipment table
+
+# Create All_Equipment page grabs information from Equipment table
 @app.route('/all_equipment')
 def all_equipment():
     conn = sqlite3.connect('DnD.db') 
@@ -68,7 +75,8 @@ def all_equipment():
     results = cur.fetchall() 
     return render_template("all_equipment.html",title="Equipment",results=results)
 
-#Create Equipment page grabs information from Equipment and EquipmentCategory table
+
+# Create Equipment page grabs information from Equipment and EquipmentCategory table
 @app.route('/equipment/<int:id>')
 def equipment(id):
     conn = sqlite3.connect('DnD.db') 
@@ -79,7 +87,8 @@ def equipment(id):
     category= cur.fetchall() 
     return render_template("equipment.html",title=results[1],results=results, category=category)
 
-#Create All_Schools page grabs information from School table
+
+# Create All_Schools page grabs information from School table
 @app.route('/schools')
 def schools():
     conn = sqlite3.connect('DnD.db') 
@@ -88,7 +97,8 @@ def schools():
     results = cur.fetchall() 
     return render_template("schools.html",title="Spells",results=results)
 
-#Create Spell page grabs information from spell and school table
+
+# Create Spell page grabs information from spell and school table
 @app.route('/spells/<int:id>')
 def spells(id): 
     conn = sqlite3.connect('DnD.db') 
@@ -99,6 +109,7 @@ def spells(id):
     school = cur.fetchone()
     return render_template("spells.html",title=school[1],school=school,spell=spell)
 
-#Runs app
+
+# Runs app
 if __name__ == "__main__":
     app.run(debug=True)
