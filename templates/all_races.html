@@ -1,12 +1,21 @@
 {% extends 'layout.html' %}
 {% block content %}
 {%for item in results%}
-<img class="all_race_img" src="/{{item[3]}}">
+<img class="all_img" src="/{{item[3]}}">
+<br>
+<br>
 <h3>
     <a class="all_link" href= "/race/{{item[0]}}">
     {{item[1]}}
     </a>
 </h3>
 <P>{{item[2]}}</P>
+<br>
+<br>
+<br>
+<br>
+<br>    
+<br>
+<br>
 {%endfor%}
 {% endblock %}
