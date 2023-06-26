@@ -57,7 +57,13 @@ nav{
 }
 
 .all_link{
-    color: Black
+    color: Black;
+    text-decoration: none;
+}
+
+.all_link:hover{
+    color: rgb(70, 70, 70);
+    text-decoration: none;
 }
 
 .search{
