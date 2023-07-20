@@ -1,21 +1,22 @@
-#import flask
+# import flask
 from flask import Flask, render_template, request, redirect, flash
 import sqlite3
 
-#Create App
+
+# Create App
 app = Flask(__name__)
 
 
 # Create Home page
 @app.route('/')
 def home():
-    return render_template("home.html",title="Home")
+    return render_template("home.html", title="Home")
 
 
 # Create Rules page
 @app.route('/rules')
 def rules():
-    return render_template("rules.html",title="Rules")
+    return render_template("rules.html", title="Rules")
 
 
 # Create All_Classess page grabs information from Class table
@@ -25,10 +26,11 @@ def all_classes():
     cur = conn.cursor()
     cur.execute('SELECT * FROM Class')
     results = cur.fetchall()
-    return render_template("all_classes.html",title="Class",results=results)
+    return render_template("all_classes.html", title="Class", results=results)
 
 
-# Create Class page grabs information from Class,EquipmentCategory,Feature and spell table
+# Create Class page grabs information from Class,EquipmentCategory, 
+# Feature and spell table
 @app.route('/class/<int:id>')
 def group(id):
     conn = sqlite3.connect('DnD.db')   
@@ -36,7 +38,7 @@ def group(id):
     cur.execute('SELECT * FROM Class WHERE id=?',(id,))
     group = cur.fetchone()
     cur.execute('SELECT name FROM EquipmentCategory WHERE id IN(SELECT pid FROM ClassProficiency WHERE cid=?)',(id,))
-    proficiency= cur.fetchall()
+    proficiency = cur.fetchall()
     cur.execute('SELECT name FROM Feature WHERE id IN(SELECT fid FROM ClassFeature WHERE cid=?)',(id,))
     feature = cur.fetchall() 
     cur.execute("SELECT name FROM Spell WHERE id IN(SELECT sid FROM ClassSpell WHERE cid=?)",(id,))

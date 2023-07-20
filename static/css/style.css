@@ -35,6 +35,11 @@ main{
     margin-left: 30px;
 }
 
+.title{
+    text-align: center;
+    font-weight: bold;
+}
+
 /* Links & Nav */
 
 nav{
