@@ -91,25 +91,36 @@ def equipment(id):
 
 
 # Create All_Schools page grabs information from School table
-@app.route('/schools')
-def schools():
+@app.route('/all_schools')
+def all_schools():
     conn = sqlite3.connect('DnD.db') 
     cur = conn.cursor() 
     cur.execute('SELECT * FROM School') 
     results = cur.fetchall() 
-    return render_template("schools.html",title="Spells",results=results)
+    return render_template("all_schools.html",title="Spell Schools",results=results)
 
 
 # Create Spell page grabs information from spell and school table
-@app.route('/spells/<int:id>')
-def spells(id): 
+@app.route('/school/<int:id>')
+def school(id): 
     conn = sqlite3.connect('DnD.db') 
     cur = conn.cursor() 
     cur.execute('SELECT * FROM Spell WHERE school=?',(id,)) 
     spell = cur.fetchall() 
     cur.execute('SELECT * FROM School WHERE id=?',(id,)) 
     school = cur.fetchone()
-    return render_template("spells.html",title=school[1],school=school,spell=spell)
+    return render_template("school.html",title=school[1],school=school,spell=spell)
+
+    # Create Spell page grabs information from spell and school table
+@app.route('/spell/<int:id>')
+def spell(id): 
+    conn = sqlite3.connect('DnD.db') 
+    cur = conn.cursor() 
+    cur.execute('SELECT * FROM Spell WHERE school=?',(id,)) 
+    spell = cur.fetchall() 
+    cur.execute('SELECT * FROM School WHERE id=?',(id,)) 
+    school = cur.fetchone()
+    return render_template("spell.html",title=spell[1],school=school,spell=spell)
 
 
 # Runs app

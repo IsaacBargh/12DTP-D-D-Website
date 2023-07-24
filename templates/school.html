@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-<a class="all_link" href= "/schools">
+<a class="all_link" href= "/all_schools">
     < Back
 </a>
 <H1 class="h1spell"> {{school[1]}}  </H1>
@@ -8,7 +8,9 @@
 
 {%for item in spell%}
 <h3>
+    <a class="all_link" href= "/spell/{{item[0]}}">
     {{item[1]}}
+    </a>
 </h3>
 <P>Casting Time: {{item[4]}}</P1>
 <P>Range: {{item[5]}}</P1>
@@ -17,3 +19,4 @@
 <Br>
 {%endfor%}
 {% endblock %}
+
