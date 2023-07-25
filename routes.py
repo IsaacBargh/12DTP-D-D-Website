@@ -100,7 +100,7 @@ def all_schools():
     return render_template("all_schools.html",title="Spell Schools",results=results)
 
 
-# Create Spell page grabs information from spell and school table
+# Create School page grabs information from spell and school table
 @app.route('/school/<int:id>')
 def school(id): 
     conn = sqlite3.connect('DnD.db') 
@@ -116,12 +116,27 @@ def school(id):
 def spell(id): 
     conn = sqlite3.connect('DnD.db') 
     cur = conn.cursor() 
-    cur.execute('SELECT * FROM Spell WHERE school=?',(id,)) 
-    spell = cur.fetchall() 
-    cur.execute('SELECT * FROM School WHERE id=?',(id,)) 
+    cur.execute('SELECT * FROM Spell WHERE id=?',(id,)) 
+    spell = cur.fetchone() 
+    cur.execute('SELECT id FROM School WHERE id= (SELECT school FROM Spell where id=?)',(id,)) 
     school = cur.fetchone()
     return render_template("spell.html",title=spell[1],school=school,spell=spell)
 
+@app.route('/all_features')
+def all_features(): 
+    conn = sqlite3.connect('DnD.db') 
+    cur = conn.cursor() 
+    cur.execute('SELECT * FROM Feature') 
+    results = cur.fetchall() 
+    return render_template("all_features.html",title="Features",results=results)
+
+@app.route('/feature/<int:id>')
+def feature(id): 
+    conn = sqlite3.connect('DnD.db') 
+    cur = conn.cursor() 
+    cur.execute('SELECT * FROM Feature WHERE id=?',(id,)) 
+    results = cur.fetchone() 
+    return render_template("feature.html",title=results[1],results=results)
 
 # Runs app
 if __name__ == "__main__":
