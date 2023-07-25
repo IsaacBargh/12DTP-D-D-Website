@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<h2>Search Bar</h2>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+
+<ul id="myUL">
+    {%for item in group%}
+    <li><a class="search" href="/class/{{item[0]}}">{{item[1]}}</a></li>
+    {%endfor%}
+    {%for item in feature%}
+    <li><a class="search" href="/feature/{{item[0]}}">{{item[1]}}</a></li>
+    {%endfor%}
+    {%for item in equipment%}
+    <li><a class="search" href="/equipment/{{item[0]}}">{{item[1]}}</a></li>
+    {%endfor%}
+    {%for item in race%}
+    <li><a class="search" href="/race/{{item[0]}}">{{item[1]}}</a></li>
+    {%endfor%}
+    {%for item in school%}
+    <li><a class="search" href="/school/{{item[0]}}">{{item[1]}}</a></li>
+    {%endfor%}
+    {%for item in spell%}
+    <li><a class="search" href="/spell/{{item[0]}}">{{item[1]}}</a></li>
+    {%endfor%}
+</ul>
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+<a href="https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_list">Script from W3schools</a>
+
+{% endblock %}

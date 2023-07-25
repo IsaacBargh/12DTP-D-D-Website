@@ -71,8 +71,11 @@ nav{
     text-decoration: none;
 }
 
-.search{
-    float: right;
+.search_nav{
+    color: Black;
+    text-decoration: none;
+    padding: 14px;
+    margin: 0px;
 }
 
 /* images */
@@ -90,4 +93,13 @@ nav{
 
 .pspell{
     text-align: center;
+}
+
+/* Spells */
+.search{
+    color: Black;
+    text-decoration: none;
+    padding: 14px;
+    margin: 0px;
+    
 }

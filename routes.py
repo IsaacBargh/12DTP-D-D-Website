@@ -138,6 +138,25 @@ def feature(id):
     results = cur.fetchone() 
     return render_template("feature.html",title=results[1],results=results)
 
+# Create Search page
+@app.route('/search')
+def search():
+    conn = sqlite3.connect('DnD.db') 
+    cur = conn.cursor() 
+    cur.execute('SELECT * FROM Feature') 
+    feature = cur.fetchall()
+    cur.execute('SELECT * FROM Class') 
+    group = cur.fetchall()
+    cur.execute('SELECT * FROM Equipment') 
+    equipment = cur.fetchall() 
+    cur.execute('SELECT * FROM Race') 
+    race = cur.fetchall() 
+    cur.execute('SELECT * FROM School') 
+    school = cur.fetchall()
+    cur.execute('SELECT * FROM Spell') 
+    spell = cur.fetchall()
+    return render_template("search.html", group=group, feature=feature, equipment=equipment, race=race, school=school, spell=spell)
+
 # Runs app
 if __name__ == "__main__":
     app.run(debug=True)
