@@ -1,8 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-<a class="all_link" href= "/all_equipment">
-    < Back
-</a>
+<button class="back" onclick="history.back()">Back</button>
 <H1>{{results[1]}}</H1>
 <p>{{results[2]}}</p>
 <img src="/{{results[4]}}">
