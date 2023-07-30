@@ -107,14 +107,27 @@ nav{
 .search {
     border: 1px solid #ddd; 
     background-color: rgb(235, 235, 235);
-    margin-right: 85%;
+    margin-right: 80%;
+    margin-left: -30px;
     padding: 12px;
     text-decoration: none;
     font-size: 18px;
     color: black;
-    display: grid;
+    display:block;
 }
 
 .search:hover{
     background-color: #d1d1d1da;
 }
+
+#myUL{
+    list-style-type: none;
+}
+
+#myInput{
+  width: 50%;
+  font-size: 15px;
+  padding-block: 8px;
+  padding-left: 5px;
+  margin-bottom: 0px; 
+}       
