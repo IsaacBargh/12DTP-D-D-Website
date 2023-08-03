@@ -6,6 +6,12 @@ import sqlite3
 # Create App
 app = Flask(__name__)
 
+def SQL_connect(query):
+    conn = sqlite3.connect('DnD.db')   
+    cur = conn.cursor()
+    cur.execute(query)
+    return cur.fetchall()
+
 
 # Create Home page
 @app.route('/')
@@ -22,10 +28,7 @@ def rules():
 # Create All_Classess page grabs information from Class table
 @app.route('/all_classes')
 def all_classes():
-    conn = sqlite3.connect('DnD.db')   
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Class')
-    results = cur.fetchall()
+    results = SQL_connect('SELECT * FROM Class')
     return render_template("all_classes.html", title="Class", results=results)
 
 
@@ -49,10 +52,7 @@ def group(id):
 # Create All_Races page grabs information from Race table
 @app.route('/all_races')
 def all_races():
-    conn = sqlite3.connect('DnD.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Race')
-    results = cur.fetchall()
+    results = SQL_connect('SELECT * FROM Race')
     return render_template("all_races.html",title="Race",results=results)
 
 
@@ -71,10 +71,7 @@ def race(id):
 # Create All_Equipment page grabs information from Equipment table
 @app.route('/all_equipment')
 def all_equipment():
-    conn = sqlite3.connect('DnD.db') 
-    cur = conn.cursor() 
-    cur.execute('SELECT * FROM Equipment') 
-    results = cur.fetchall() 
+    results = SQL_connect('SELECT * FROM Equipment')
     return render_template("all_equipment.html",title="Equipment",results=results)
 
 
@@ -93,10 +90,7 @@ def equipment(id):
 # Create All_Schools page grabs information from School table
 @app.route('/all_schools')
 def all_schools():
-    conn = sqlite3.connect('DnD.db') 
-    cur = conn.cursor() 
-    cur.execute('SELECT * FROM School') 
-    results = cur.fetchall() 
+    results = SQL_connect('SELECT * FROM School') 
     return render_template("all_schools.html",title="Spell Schools",results=results)
 
 
@@ -124,10 +118,7 @@ def spell(id):
 
 @app.route('/all_features')
 def all_features(): 
-    conn = sqlite3.connect('DnD.db') 
-    cur = conn.cursor() 
-    cur.execute('SELECT * FROM Feature') 
-    results = cur.fetchall() 
+    results = SQL_connect('SELECT * FROM Feature')
     return render_template("all_features.html",title="Features",results=results)
 
 @app.route('/feature/<int:id>')
@@ -141,20 +132,12 @@ def feature(id):
 # Create Search page
 @app.route('/search')
 def search():
-    conn = sqlite3.connect('DnD.db') 
-    cur = conn.cursor() 
-    cur.execute('SELECT * FROM Feature') 
-    feature = cur.fetchall()
-    cur.execute('SELECT * FROM Class') 
-    group = cur.fetchall()
-    cur.execute('SELECT * FROM Equipment') 
-    equipment = cur.fetchall() 
-    cur.execute('SELECT * FROM Race') 
-    race = cur.fetchall() 
-    cur.execute('SELECT * FROM School') 
-    school = cur.fetchall()
-    cur.execute('SELECT * FROM Spell') 
-    spell = cur.fetchall()
+    feature = SQL_connect('SELECT * FROM Feature')
+    group = SQL_connect('SELECT * FROM Class')
+    equipment = SQL_connect('SELECT * FROM Equipment') 
+    race = SQL_connect('SELECT * FROM Race') 
+    school = SQL_connect('SELECT * FROM School')
+    spell = SQL_connect('SELECT * FROM Spell')
     return render_template("search.html", group=group, feature=feature, equipment=equipment, race=race, school=school, spell=spell)
 
 # Runs app
