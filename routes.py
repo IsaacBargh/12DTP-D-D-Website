@@ -105,6 +105,7 @@ def school(id):
     school = cur.fetchone()
     return render_template("school.html",title=school[1],school=school,spell=spell)
 
+
     # Create Spell page grabs information from spell and school table
 @app.route('/spell/<int:id>')
 def spell(id): 
@@ -129,6 +130,7 @@ def feature(id):
     results = cur.fetchone() 
     return render_template("feature.html",title=results[1],results=results)
 
+
 # Create Search page
 @app.route('/search')
 def search():
@@ -138,7 +140,8 @@ def search():
     race = SQL_connect('SELECT * FROM Race') 
     school = SQL_connect('SELECT * FROM School')
     spell = SQL_connect('SELECT * FROM Spell')
-    return render_template("search.html", group=group, feature=feature, equipment=equipment, race=race, school=school, spell=spell)
+    return render_template("search.html", title="Search", group=group, feature=feature, equipment=equipment, race=race, school=school, spell=spell)
+
 
 # Runs app
 if __name__ == "__main__":
