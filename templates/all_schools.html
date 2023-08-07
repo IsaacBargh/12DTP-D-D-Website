@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1 class="title">Spell Schools</h1>
-{%for item in results%}
+{%for item in school%}
 <h3>
     <a class="all_link" href= "/school/{{item[0]}}">
     {{item[1]}}
