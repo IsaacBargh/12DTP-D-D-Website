@@ -86,7 +86,7 @@ def equipment(id):
     equipment = cur.fetchone()
     cur.execute('SELECT name FROM EquipmentCategory WHERE id =(SELECT Category FROM Equipment WHERE id=?)',(id,))
     category = cur.fetchall()
-    return render_template("equipment.html", title=results[1], equipment=equipment, category=category)
+    return render_template("equipment.html", title=equipment[1], equipment=equipment, category=category)
 
 
 # Create All_Schools page grabs information from School table
