@@ -8,35 +8,44 @@ app = Flask(__name__)
 
 
 def sql_connect(query):
+    # takes query, connects DnD.db database and returns all from query
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute(query)
     return cur.fetchall()
 
 
-# Create Home page
 @app.route('/')
 def home():
+    # returns home.html from templates and makes title Home
     return render_template("home.html", title="Home")
 
 
-# Create Rules page
 @app.route('/rules')
 def rules():
+    # returns rules.html from templates and makes title Rules
     return render_template("rules.html", title="Rules")
 
 
-# Create All_Classess page grabs information from Class table
 @app.route('/all_classes')
 def all_classes():
+    # returns all from Class table in database in variable called group
+    # returns all_classes.html from templates and makes title Class
     group = sql_connect('SELECT * FROM Class')
     return render_template("all_classes.html", title="Class", group=group)
 
 
-# Create Class page grabs information from Class,EquipmentCategory,
-# Feature and spell table
 @app.route('/class/<int:id>')
 def group(id):
+    # returns all from Class table in database where ids are equal
+    # in variable called group
+    # returns name from EquipmentCategory table in database where id = pid
+    # from ClassProficiency where cid = id in variable called proficiency
+    # returns name from Feature table in database where id = fid from
+    # ClassFeature table where cid = id in variable called feature
+    # returns name from Spell table in database where id = sid from
+    # ClassSpell table where cid = id in variable called spell
+    # returns class.html from templates and makes title name from Class table
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Class WHERE id=?', (id,))
@@ -62,11 +71,11 @@ def all_races():
 def race(id):
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
-    cur.execute('SELECT * FROM Race WHERE id=?',(id,)) 
+    cur.execute('SELECT * FROM Race WHERE id=?', (id,))
     race = cur.fetchone()
     cur.execute('SELECT name FROM Feature WHERE id IN(SELECT fid FROM RaceFeature WHERE rid=?)', (id,))
     feature = cur.fetchall()
-    return render_template("race.html", title=race[1],race=race, feature=feature)
+    return render_template("race.html", title=race[1], race=race, feature=feature)
 
 
 # Create All_Equipment page grabs information from Equipment table
@@ -84,7 +93,7 @@ def equipment(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Equipment WHERE id=?', (id,))
     equipment = cur.fetchone()
-    cur.execute('SELECT name FROM EquipmentCategory WHERE id =(SELECT Category FROM Equipment WHERE id=?)',(id,))
+    cur.execute('SELECT name FROM EquipmentCategory WHERE id =(SELECT Category FROM Equipment WHERE id=?)', (id,))
     category = cur.fetchall()
     return render_template("equipment.html", title=equipment[1], equipment=equipment, category=category)
 

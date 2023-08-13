@@ -5,13 +5,13 @@ body{
     background-color: whitesmoke;
     margin-top: 2%;
     margin-bottom: 2%;
-    margin-right: 4%;
-    margin-left: 4%;
+    margin-right: 12%;
+    margin-left: 12%;
     font-size: 100%;
 }
 
 html{
-    background-image: linear-gradient(to left, rgb(212, 26, 26), rgb(92, 7, 7));
+    background-color: rgb(205, 216, 219);
 }
 
 header{
@@ -125,3 +125,8 @@ nav{
   padding-block: 0.5%;
   margin-bottom: 0px; 
 }       
+
+/* Rules */
+table {
+    border: 1px;
+}
