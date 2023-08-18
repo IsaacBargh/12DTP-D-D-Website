@@ -1,19 +1,29 @@
 /* Global */
 
 body{
-    font-family:"Comic Sans MS";
-    background-color: whitesmoke;
+    font-family:Arial;
+    background-color: rgb(223, 223, 223);
     margin: 0;
     font-size: 100%;    
 }
 
-
-
+main{
+    background-color:whitesmoke;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-top: 0;
+    margin-bottom: 0;    
+    margin-right: 15%;
+    margin-left: 15%;
+}
+    
 header{
     background-color: gray;
     padding: 1px;
     font-family: fantasy;
-    text-align: center;
+    text-align: center; 
     color: firebrick;
     font-weight: bolder;
     font-size: 300%;
@@ -22,13 +32,7 @@ header{
 footer{
     background-color: gray;
     font-family: 'Lucida Sans';
-}
-
-main{
-    margin-top: 1%;
-    margin-bottom: 3%;    
-    margin-right: 15%;
-    margin-left: 15%;
+    margin-top: 0;
 }
 
 .title{
@@ -53,6 +57,7 @@ nav{
     color: #FFFF;
     font-weight: bold;
     padding: 1%;
+    margin-bottom: 0%;
 }
 
 .nav_link{
@@ -81,8 +86,6 @@ nav{
     color: Black;
     text-decoration: none;
     padding: 1%;
-    margin: 0px;
-
 }
 
 .nav_search:hover{
