@@ -73,13 +73,22 @@ nav{
 }
 
 .all_link{
-    color: Black;
+    color: whitesmoke;
     text-decoration: none;
+    background-color: firebrick;
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    width: 50%;
 }
 
-.all_link:hover{
-    color: rgb(70, 70, 70);
+.all_link:hover{    
+    color: whitesmoke(70, 70, 70);
+    background-color: rgb(114, 22, 22);
     text-decoration: none;
+    border-style: solid;
+    border-width: 4px;
 }
 
 .nav_search{
@@ -121,10 +130,14 @@ nav{
     font-size: 120%;    
     color: black;
     display:block;
+
 }
 
 .search:hover{
     background-color: #d1d1d1da;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #666;
 }
 
 #myUL{
@@ -145,5 +158,27 @@ nav{
 
 /* Rules */
 table {
-    border: 1px;
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align:middle;
+    width:30%;
+  }
+
+th{
+    background-color: firebrick;
+    color: white;
 }
+
+th, td {
+  border: 1px solid black;
+}   
+
+tr:nth-child(odd) {
+    background-color: whitesmoke;
+  }
+  
+tr:nth-child(even) {
+    background-color: rgb(228, 228, 228);
+  }
+
+/* alternating background colour from https://www.digitalocean.com/community/tutorials/how-to-style-a-table-with-css */

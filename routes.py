@@ -37,15 +37,7 @@ def all_classes():
 
 @app.route('/class/<int:id>')
 def group(id):
-    # returns all from Class table in database where ids are equal
-    # in variable called group
-    # returns name from EquipmentCategory table in database where id = pid
-    # from ClassProficiency where cid = id in variable called proficiency
-    # returns name from Feature table in database where id = fid from
-    # ClassFeature table where cid = id in variable called feature
-    # returns name from Spell table in database where id = sid from
-    # ClassSpell table where cid = id in variable called spell
-    # returns class.html from templates and makes title name from Class table
+    #returns 
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Class WHERE id=?', (id,))
@@ -59,14 +51,14 @@ def group(id):
     return render_template('class.html', title=group[1], group=group, proficiency=proficiency, feature=feature, spell=spell)
 
 
-# Create All_Races page grabs information from Race table
+# Create All_Races page using information from Race table
 @app.route('/all_races')
 def all_races():
     race = sql_connect('SELECT * FROM Race')
     return render_template("all_races.html", title="Race", race=race)
 
 
-# Create Race page grabs information from Race and Feature table
+# Create Race page using information from Race and Feature table
 @app.route('/race/<int:id>')
 def race(id):
     conn = sqlite3.connect('DnD.db')
