@@ -67,17 +67,11 @@ nav{
     margin: 0px;
     margin-left: 2%;
     margin-right: 2%;
-    border: firebrick;
-    border-width: 1px;
-    border-style: solid;
 }
 
 .nav_link:hover{
     background-color: rgb(120, 20, 20);
     text-decoration: none;
-    border: rgb(110, 20, 20);
-    border-width: 1px;
-    border-style: solid;
 }
 
 .all_link{
