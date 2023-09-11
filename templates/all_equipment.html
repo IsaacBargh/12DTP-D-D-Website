@@ -2,21 +2,12 @@
 {% block content %}
 <h1 class="title">Equipment</h1>
 {%for item in equipment%}
-<img class="all_img" src="/{{item[4]}}">
-<br>
-<br>
 <h3>
-    <a class="all_link" href= "/equipment/{{item[0]}}">
+    <a class="all_link_list" href= "/equipment/{{item[0]}}">
     {{item[1]}}
     </a>
 </h3>
-<P>{{item[5]}}</P>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<P class="center">{{item[5]}}</P>
 <br>
 {%endfor%}
 {% endblock %}

@@ -3,10 +3,11 @@
 <h1 class="title">Spell Schools</h1>
 {%for item in school%}
 <h3>
-    <a class="all_link" href= "/school/{{item[0]}}">
+    <a class="all_link_list" href= "/school/{{item[0]}}">
     {{item[1]}}
     </a>
 </h3>
-<P>{{item[2]}}</P>
+<P class="center">{{item[2]}}</P>
+<br>
 {%endfor%}
 {% endblock %}

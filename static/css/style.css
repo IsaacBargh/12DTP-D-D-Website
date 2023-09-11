@@ -20,13 +20,14 @@ main{
 }
     
 header{
-    background-color: rgb(160, 30, 30);
+    background-color: rgb(146, 27, 27);
     padding: 1px;
     font-family: fantasy;
     text-align: center; 
     color: whitesmoke;
     font-weight: bolder;
     font-size: 300%;
+    user-select: none;
 }
 
 footer{
@@ -44,10 +45,20 @@ footer{
     background-color: whitesmoke;
     border-color: #ddd;
     font-family:"Comic Sans MS";
+    user-select: none;
+    border-radius:7px;
+    width:10%;
+    transition: 0.2s;
 }
 
 .back:hover{
     background-color: rgb(226, 226, 226);
+    border-radius: 15px;
+}
+
+hr{
+    border-top: firebrick;
+    border-style: groove;
 }
 
 /* Links & Nav */
@@ -58,6 +69,7 @@ nav{
     padding: 1%;
     margin-bottom: 0%;
     text-align: center;
+    user-select: none;
 }
 
 .nav_link{
@@ -67,30 +79,12 @@ nav{
     margin: 0px;
     margin-left: 2%;
     margin-right: 2%;
+    transition: .2s;
 }
 
 .nav_link:hover{
     background-color: rgb(120, 20, 20);
     text-decoration: none;
-}
-
-.all_link{
-    color: whitesmoke;
-    text-decoration: none;
-    background-color: firebrick;
-    padding: 5px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(60, 20, 20);
-    width: 50%;
-}
-
-.all_link:hover{    
-    color: whitesmoke(70, 70, 70);
-    background-color: rgb(120, 20, 20);
-    text-decoration: none;
-    border-style: solid;
-    border-width: 2px;
 }
 
 .all_link_list{
@@ -105,11 +99,13 @@ nav{
     text-align: center;
     display: block;
     margin-left: 30%;
+    user-select: none;
+    transition: .5s;
     }
 
 .all_link_list:hover{    
-    color: whitesmoke(70, 70, 70);
-    background-color: rgb(120, 20, 20);
+    color: firebrick;
+    background-color: rgb(226, 226, 226);
     text-decoration: none;
     border-style: solid;
     border-width: 2px;
@@ -126,24 +122,30 @@ nav{
     text-decoration: none;
 }
 
+.center{
+    text-align: center;
+}
+
 /* images */
 
 .all_img{
-    float: left; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+}
+
+.right_img{
+    float: right;
+    width: 300px
 }
 
 .logo{
     height: 70px;
 }
 
-/* Spells */
-
-.h1spell{
-    text-align: center;
-}
-
-.pspell{
-    text-align: center;
+.search_img{
+    width: 15px;
 }
 
 /* Search */
@@ -158,6 +160,7 @@ nav{
     color: black;
     display:block;
     text-align: center;
+    user-select: none;
 }
 
 .search:hover{

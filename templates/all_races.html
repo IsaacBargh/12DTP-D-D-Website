@@ -2,21 +2,14 @@
 {% block content %}
 <h1 class="title">Races</h1>
 {%for item in race%}
+<hr>
 <img class="all_img" src="/{{item[3]}}">
-<br>
-<br>
 <h3>
-    <a class="all_link" href= "/race/{{item[0]}}">
+    <a class="all_link_list" href= "/race/{{item[0]}}">
     {{item[1]}}
     </a>
 </h3>
-<P>{{item[2]}}</P>
-<br>
-<br>
-<br>
-<br>
-<br>    
-<br>
+<P class="center">{{item[2]}}</P>
 <br>
 {%endfor%}
 {% endblock %}
