@@ -21,10 +21,10 @@ def home():
     return render_template("home.html", title="Home")
 
 
-@app.route('/rules')
-def rules():
-    # returns rules.html from templates and makes title Rules
-    return render_template("rules.html", title="Rules")
+@app.route('/character')
+def character():
+    # returns rules.html from templates and makes title Character Creator
+    return render_template("character.html", title="Character Creator")
 
 
 @app.route('/all_classes')
