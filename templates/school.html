@@ -2,8 +2,8 @@
 {% block content %}
 <button class="back" onclick="history.back()">Back</button>
 <H1 class="center"> {{school[1]}}  </H1>
+<hr>
 <p class="center"> {{school[2]}}  </p>
-
 {%for item in spell%}
 <h3>
     <a class="all_link_list" href= "/spell/{{item[0]}}">

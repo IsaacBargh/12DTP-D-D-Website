@@ -1,9 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
 <button class="back" onclick="history.back()">Back</button>
+<img class="right_img" src="/{{race[3]}}">
 <H1>{{race[1]}}</H1>
+<hr>
 <p>{{race[2]}}</p>
-<img src="/{{race[3]}}">
+<p>{{race[9]}}</p>
+<H4>Average Age: {{race[5]}}</H4>
+<H4>Average Size: {{race[6]}}</H4>
+<H4>Average Weight: {{race[7]}}</H4>
+<H4>Languages: {{race[8]}}</H4>
 
 
 <H3>Features</H3>
