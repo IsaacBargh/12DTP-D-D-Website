@@ -1,15 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1 class="title">Races</h1>
-{%for item in race%}
+{%for species in race%}
 <hr>
-<img class="all_img" src="/{{item[3]}}">
+<img class="all_img" src="/{{species[3]}}">
 <h3>
-    <a class="all_link_list" href= "/race/{{item[0]}}">
-    {{item[1]}}
+    <!--Creats link to race page matching id-->
+    <a class="all_link_list" href= "/race/{{species[0]}}">
+    {{species[1]}}
     </a>
 </h3>
-<P class="center">{{item[4]}}</P>
+<P class="center">{{species[4]}}</P>
 <br>
 {%endfor%}
 {% endblock %}

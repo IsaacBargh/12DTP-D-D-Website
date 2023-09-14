@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
+<!--Creats button to return to previous page-->
 <button class="back" onclick="history.back()">Back</button>
 <H1>{{group[1]}}</H1>
 <hr>
@@ -8,20 +9,19 @@
 <p>{{group[2]}}</p>
 <H3>Starting Gear</H3>
 <p>{{group[6]}}</p>
-
+<!--displays proficiencies-->
 <H3>Proficiencies</H3>
-{%for item in proficiency%}
-<p> {{item[0]}}  </p>
+{%for equipment in proficiency%}
+<p> {{equipment[0]}}  </p>
 {%endfor%}
-
+<!--displays features-->
 <H3>Features</H3>
-{%for item in feature%}
-<p> {{item[0]}}  </p>
+{%for feat in feature%}
+<p> {{feat[0]}}  </p>
 {%endfor%}
-
+<!--displays spells-->
 <H3>Spells</H3>
 {%for item in spell%}
 <p> {{item[0]}}  </p>
 {%endfor%}
-
 {% endblock %}

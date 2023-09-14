@@ -1,15 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
+<!--Creats button to return to previous page-->
 <button class="back" onclick="history.back()">Back</button>
 <H1 class="center"> {{school[1]}}  </H1>
 <hr>
 <p class="center"> {{school[2]}}  </p>
 {%for item in spell%}
 <h3>
+    <!--Creats link to spell page matching id-->
     <a class="all_link_list" href= "/spell/{{item[0]}}">
     {{item[1]}}
     </a>
 </h3>
 {%endfor%}
 {% endblock %}
-

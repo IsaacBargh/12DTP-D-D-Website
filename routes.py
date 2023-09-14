@@ -17,27 +17,26 @@ def sql_connect(query):
 
 @app.route('/')
 def home():
-    # returns home.html from templates and makes title Home
+    # creates home page and makes title Home
     return render_template("home.html", title="Home")
 
 
 @app.route('/character')
 def character():
-    # returns rules.html from templates and makes title Character Creator
+    # creates character page and makes title Character Creator
     return render_template("character.html", title="Character Creator")
 
 
 @app.route('/all_classes')
 def all_classes():
-    # returns all from Class table in database in variable called group
-    # returns all_classes.html from templates and makes title Class
+    # Creates all_class page using information from the Class table
     group = sql_connect('SELECT * FROM Class')
     return render_template("all_classes.html", title="Class", group=group)
 
 
 @app.route('/class/<int:id>')
 def group(id):
-    #returns 
+    # Creates class page using information from Class, EquipmentCategory, Feature and spell tables
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Class WHERE id=?', (id,))
@@ -51,16 +50,16 @@ def group(id):
     return render_template('class.html', title=group[1], group=group, proficiency=proficiency, feature=feature, spell=spell)
 
 
-# Create All_Races page using information from Race table
 @app.route('/all_races')
 def all_races():
+    # Creates All_Races page using information from Race table
     race = sql_connect('SELECT * FROM Race')
     return render_template("all_races.html", title="Race", race=race)
 
 
-# Create Race page using information from Race and Feature table
 @app.route('/race/<int:id>')
 def race(id):
+    # Creates Race page using information from Race and Feature table
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Race WHERE id=?', (id,))
@@ -70,17 +69,17 @@ def race(id):
     return render_template("race.html", title=race[1], race=race, feature=feature)
 
 
-# Create All_Equipment page grabs information from Equipment table
 @app.route('/all_equipment')
 def all_equipment():
+    # Creates All_Equipment page grabs information from Equipment table
     equipment = sql_connect('SELECT * FROM Equipment')
     return render_template("all_equipment.html", title="Equipment", equipment=equipment)
 
 
-# Create Equipment page grabs information from Equipment
-# and EquipmentCategory table
 @app.route('/equipment/<int:id>')
 def equipment(id):
+    # Creates Equipment page grabs information from Equipment
+    # and EquipmentCategory table
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Equipment WHERE id=?', (id,))
@@ -90,16 +89,16 @@ def equipment(id):
     return render_template("equipment.html", title=equipment[1], equipment=equipment, category=category)
 
 
-# Create All_Schools page grabs information from School table
 @app.route('/all_schools')
 def all_schools():
+    # Creates All_Schools page grabs information from School table
     school = sql_connect('SELECT * FROM School')
     return render_template("all_schools.html", title="Spell Schools", school=school)
 
 
-# Create School page grabs information from spell and school table
 @app.route('/school/<int:id>')
 def school(id):
+    # Creates School page grabs information from spell and school table
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Spell WHERE school=?', (id,))
@@ -109,9 +108,9 @@ def school(id):
     return render_template("school.html", title=school[1], school=school, spell=spell)
 
 
-# Create Spell page grabs information from spell and school table
 @app.route('/spell/<int:id>')
 def spell(id):
+    # Creates Spell page grabs information from spell and school table
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Spell WHERE id=?', (id,))
@@ -123,12 +122,14 @@ def spell(id):
 
 @app.route('/all_features')
 def all_features():
+    # Create all_feature page using information from Feature table
     features = sql_connect('SELECT * FROM Feature')
     return render_template("all_features.html", title="Features", features=features)
 
 
 @app.route('/feature/<int:id>')
 def feature(id):
+    # Create feature page using information from Feature table
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Feature WHERE id=?', (id,))
@@ -136,9 +137,9 @@ def feature(id):
     return render_template("feature.html", title=features[1], features=features)
 
 
-# Create Search page
 @app.route('/search')
 def search():
+    # Create Search page using information from all tables
     feature = sql_connect('SELECT * FROM Feature')
     group = sql_connect('SELECT * FROM Class')
     equipment = sql_connect('SELECT * FROM Equipment')

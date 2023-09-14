@@ -4,6 +4,7 @@
 <h2 class="search_title">Search Bar</h2>
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
 
+<!--Creates links to all informative pages-->
 <ul id="myUL">
     {%for item in group%}
     <li><a class="search" href="/class/{{item[0]}}">{{item[1]}}</a></li>
@@ -27,6 +28,7 @@
     <li><a class="search" href="/character">Character Creator</a></li>
 </ul>
 
+<!--created search bar that shows all above pages that name matche the input-->
 <script>
 function myFunction() {
     var input, filter, ul, li, a, i, txtValue;
