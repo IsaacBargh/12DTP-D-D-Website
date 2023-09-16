@@ -57,6 +57,24 @@ footer{
     border-radius: 15px;
 }
 
+.back_error{
+    background-color: whitesmoke;
+    border-color: #ddd;
+    font-family:"Comic Sans MS";
+    user-select: none;
+    border-radius:7px;
+    width:10%;
+    transition: 0.2s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back_error:hover{
+    background-color: rgb(226, 226, 226);
+    border-radius: 15px;
+}
+
 hr{
     border-top: firebrick;
     border-style: groove;

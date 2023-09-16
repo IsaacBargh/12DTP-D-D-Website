@@ -1,5 +1,5 @@
 # import flask
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 import sqlite3
 
 
@@ -7,7 +7,7 @@ import sqlite3
 app = Flask(__name__)
 
 
-def sql_connect(query):
+def sql_connect(query,id=None):
     # takes query, connects DnD.db database and returns all from query
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
@@ -46,8 +46,11 @@ def group(id):
     cur.execute('SELECT name FROM Feature WHERE id IN(SELECT fid FROM ClassFeature WHERE cid=?)', (id,))
     feature = cur.fetchall()
     cur.execute("SELECT name FROM Spell WHERE id IN(SELECT sid FROM ClassSpell WHERE cid=?)", (id,))
-    spell = cur.fetchall()
-    return render_template('class.html', title=group[1], group=group, proficiency=proficiency, feature=feature, spell=spell)
+    spell = cur.fetchall()  
+    if group != None:
+        return render_template('class.html', title=group[1], group=group, proficiency=proficiency, feature=feature, spell=spell)
+    else:
+        return abort(404)
 
 
 @app.route('/all_races')
@@ -66,7 +69,10 @@ def race(id):
     race = cur.fetchone()
     cur.execute('SELECT name FROM Feature WHERE id IN(SELECT fid FROM RaceFeature WHERE rid=?)', (id,))
     feature = cur.fetchall()
-    return render_template("race.html", title=race[1], race=race, feature=feature)
+    if race != None:
+        return render_template("race.html", title=race[1], race=race, feature=feature)
+    else:
+        return abort(404)
 
 
 @app.route('/all_equipment')
@@ -86,7 +92,10 @@ def equipment(id):
     equipment = cur.fetchone()
     cur.execute('SELECT name FROM EquipmentCategory WHERE id =(SELECT Category FROM Equipment WHERE id=?)', (id,))
     category = cur.fetchall()
-    return render_template("equipment.html", title=equipment[1], equipment=equipment, category=category)
+    if equipment != None:
+        return render_template("equipment.html", title=equipment[1], equipment=equipment, category=category)
+    else:
+        return abort(404)
 
 
 @app.route('/all_schools')
@@ -105,7 +114,10 @@ def school(id):
     spell = cur.fetchall()
     cur.execute('SELECT * FROM School WHERE id=?', (id,))
     school = cur.fetchone()
-    return render_template("school.html", title=school[1], school=school, spell=spell)
+    if school != None:
+        return render_template("school.html", title=school[1], school=school, spell=spell)
+    else:
+        return abort(404)
 
 
 @app.route('/spell/<int:id>')
@@ -117,7 +129,10 @@ def spell(id):
     spell = cur.fetchone()
     cur.execute('SELECT id FROM School WHERE id= (SELECT school FROM Spell where id=?)', (id,))
     school = cur.fetchone()
-    return render_template("spell.html", title=spell[1], school=school, spell=spell)
+    if spell != None:
+        return render_template("spell.html", title=spell[1], school=school, spell=spell)
+    else:
+        return abort(404)
 
 
 @app.route('/all_features')
@@ -134,8 +149,10 @@ def feature(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Feature WHERE id=?', (id,))
     features = cur.fetchone()
-    return render_template("feature.html", title=features[1], features=features)
-
+    if features != None:
+        return render_template("feature.html", title=features[1], features=features)
+    else:
+        return abort(404)
 
 @app.route('/search')
 def search():
