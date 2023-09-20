@@ -5,12 +5,14 @@
 <H1 class="center"> {{school[1]}}  </H1>
 <hr>
 <p class="center"> {{school[2]}}  </p>
-{%for item in spell%}
-<h3>
-    <!--Creats link to spell page matching id-->
-    <a class="all_link_list" href= "/spell/{{item[0]}}">
-    {{item[1]}}
-    </a>
-</h3>
-{%endfor%}
+<div class="all_list_container">
+    {%for item in spell%}
+    <h3>
+        <!--Creats link to spell page matching id-->
+        <a class="all_link_list" href= "/spell/{{item[0]}}">
+        {{item[1]}}
+        </a>
+    </h3>
+    {%endfor%}
+</div>
 {% endblock %}

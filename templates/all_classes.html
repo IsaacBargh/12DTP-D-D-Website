@@ -1,16 +1,20 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1 class="title">Classes</h1>
-{%for class in group%}
 <hr>
-<img class="all_img" src="/{{class[3]}}">
-<h3>
-    <!--Creats link to class page matching id-->
-    <a class="all_link_list" href= "/class/{{class[0]}}">
-    {{class[1]}}
-    </a>
-</h3>
-<P class="center">{{class[4]}}</P>
-<br>
-{%endfor%}
+<div class="all_link_container">
+    {%for class in group%}
+    <div class="all_link_item">
+        <a class = "all_link_grid" href = "/class/{{class[0]}}">
+            <img class="all_img" src="/{{class[3]}}">
+        <h3 class="all_name">
+            {{class[1]}}
+        </h3>
+        <P class="center">{{class[4]}}</P>
+        </a>
+    </div>
+
+    {%endfor%}
+</div>
+
 {% endblock %}  

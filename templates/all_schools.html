@@ -2,14 +2,17 @@
 {% block content %}
 <h1 class="title">Spell Schools</h1>
 <hr>
-{%for item in school%}
-<h3>
-    <!--Creats link to school page matching id-->
-    <a class="all_link_list" href= "/school/{{item[0]}}">
-    {{item[1]}}
-    </a>
-</h3>
-<P class="center">{{item[2]}}</P>
-<br>
-{%endfor%}
+<div class="all_list_container">
+    {%for item in school%}
+    <div>
+    <h3>
+        <!--Creats link to school page matching id-->
+        <a class="all_link_list" href= "/school/{{item[0]}}">
+        {{item[1]}}
+        </a>
+    </h3>
+    <P class="center">{{item[2]}}</P>
+    </div>
+    {%endfor%}
+</div>
 {% endblock %}

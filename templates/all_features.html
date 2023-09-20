@@ -2,12 +2,15 @@
 {% block content %}
 <h1 class="title">Features</h1>
 <hr>
-{%for feat in features%}
-<h3>
-    <!--Creats link to feature page matching id-->
-    <a class="all_link_list" href= "/feature/{{feat[0]}}">
-    {{feat[1]}}
-    </a>
-</h3>
-{%endfor%}
+<div class="all_list_container">
+    {%for feat in features%}
+        <h3>
+            <!--Creats link to feature page matching id-->
+            <a class="all_link_list" href= "/feature/{{feat[0]}}">
+            {{feat[1]}}
+            </a>
+        </h3>
+    {%endfor%}
+</div>
+
 {% endblock %}
