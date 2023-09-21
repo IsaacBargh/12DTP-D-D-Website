@@ -2,18 +2,23 @@
 <html lang="en">
 
 <head>
+    {#Adjusts website scale to fit devices screen so the website can be easily used by different devices#}
     <meta name="viewport" content="width=device-width" inital-scale="1.0">
+    {#makes the title the variable title assigned in routes.py#}
     <title>{{title}}</title>
+    {#links page to style sheet so page can be designed with CSS#}
     <link rel="stylesheet" href="/static/css/style.css"/>
 </head>
 <body>
     <header>
-        {% include "header.html" %}
+        <h1>Dungeons <img class="logo" src="/static/images/symbol.png"> Dragons</h1>
     </header>
     <nav>
+        {#makes nav nav.html#}
         {% include "nav.html" %}
     </nav>
     <main>
+        {#fills block with content from choosen html page#}
         {% block content %}{% endblock %}
     </main>
     <footer>

@@ -1,7 +1,5 @@
 {% extends 'layout.html' %}
 {% block content %}
-<!--Creats button to return to previous page-->
-<button class="back" onclick="history.back()">Back</button>
 <img class="right_img" src="/{{race[3]}}">
 <H1>{{race[1]}}</H1>
 <hr>
@@ -11,9 +9,12 @@
 <H4>Average Size: {{race[6]}}</H4>
 <H4>Average Weight: {{race[7]}}</H4>
 <H4>Languages: {{race[8]}}</H4>
-<!--displays Features-->
+{#displays Features#}
 <H3>Features</H3>
 {%for item in feature%}
 <p> {{item[0]}}  </p>
 {%endfor%}
+{#Creates button to return to previous page#}
+<button class="back" onclick="history.back()">Back</button>
+<br>
 {% endblock %}

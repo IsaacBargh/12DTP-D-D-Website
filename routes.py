@@ -1,4 +1,4 @@
-# import flask
+# import necessary commands from flask and sqlite3
 from flask import Flask, render_template, abort
 import sqlite3
 
@@ -7,17 +7,24 @@ import sqlite3
 app = Flask(__name__)
 
 
-def sql_connect(query, id=None):
-    # takes query and id if one exists, connects DnD.db database and returns
-    # all from query
+def sql_connect(query, id=None, fetchall=True):
+    # Connects to DnD.db
     conn = sqlite3.connect('DnD.db')
     cur = conn.cursor()
-    # checks if query uses id
-    if id:
+    # checks if given new id
+    if id is not None:
+        # executes given query for given id
         cur.execute(query, id)
     else:
+        # executes given query
         cur.execute(query)
-    return cur.fetchall()
+    # checks if fetchone
+    if fetchall is False:
+        # returns one result
+        return cur.fetchone()
+    else:
+        # returns all results
+        return cur.fetchall()
 
 
 @app.route('/')
@@ -34,56 +41,63 @@ def character():
 
 @app.route('/all_classes')
 def all_classes():
-    # renders all_class.html using information from the Class table
+    # runs sql_connect function where query equals 'SELECT * FROM Class'
     group = sql_connect('SELECT * FROM Class')
+    # renders all_class.html using information from the Class table so that I
+    # only grab the information that will be used
     return render_template("all_classes.html", title="Class", group=group)
 
 
 @app.route('/class/<int:id>')
 def group(id):
-    # renders class.html using information from Class, EquipmentCategory,
-    # Feature and spell tables
-    conn = sqlite3.connect('DnD.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Class WHERE id=?', (id,))
-    group = cur.fetchone()
-    cur.execute('SELECT name FROM EquipmentCategory WHERE id IN'
-                '(SELECT pid FROM ClassProficiency WHERE cid=?)', (id,))
-    proficiency = cur.fetchall()
-    cur.execute('SELECT name FROM Feature WHERE id IN'
-                '(SELECT fid FROM ClassFeature WHERE cid=?)', (id,))
-    feature = cur.fetchall()
-    cur.execute('SELECT name FROM Spell WHERE id IN'
-                '(SELECT sid FROM ClassSpell WHERE cid=?)', (id,))
-    spell = cur.fetchall()
+    # only grabs necessary information from database for choosen class
+    # selects one row from the Class table that matches given id
+    group = sql_connect('SELECT * FROM Class WHERE id=?', (id,), False)
+    # selects the name of all EquipmentCategories that have an id matched with
+    # the given class id in the ClassProficiency table
+    proficiency = sql_connect('SELECT name FROM EquipmentCategory WHERE id IN'
+                              '(SELECT pid FROM ClassProficiency WHERE cid=?)',
+                              (id,))
+    # selects the name of all Features that have an id matched with
+    # the given class id in the ClassFeature table
+    feature = sql_connect('SELECT name FROM Feature WHERE id IN'
+                          '(SELECT fid FROM ClassFeature WHERE cid=?)', (id,))
+    # selects the name of all spells that have an id matched with
+    # the given class id in the ClassSpell table
+    spell = sql_connect('SELECT name FROM Spell WHERE id IN'
+                        '(SELECT sid FROM ClassSpell WHERE cid=?)', (id,))
+    # checks information was received from class table
     if group:
-        # checks information was received from class table
+        # renders class.html with variables group, proficiency, feature and
+        # spell to store information pulled from database above and make the
+        # title equal to the name of the choosen class
         return render_template('class.html', title=group[1], group=group,
                                proficiency=proficiency, feature=feature,
                                spell=spell)
     else:
-        return abort(404)
         # returns 404 error if no information is grabbed from class table
+        return abort(404)
 
 
 @app.route('/all_races')
 def all_races():
-    # renders all_races.html using information from Race table
+    # renders all_race.html using information from the Race table so that I
+    # only grab the information that will be used
     race = sql_connect('SELECT * FROM Race')
     return render_template("all_races.html", title="Race", race=race)
 
 
 @app.route('/race/<int:id>')
 def race(id):
-    # renders race.html using information from Race and Feature table
-    conn = sqlite3.connect('DnD.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Race WHERE id=?', (id,))
-    race = cur.fetchone()
-    cur.execute('SELECT name FROM Feature WHERE id IN'
-                '(SELECT fid FROM RaceFeature WHERE rid=?)', (id,))
-    feature = cur.fetchall()
+    # only grabs necessary information from database for choosen race
+    race = sql_connect('SELECT * FROM Race WHERE id=?', (id,), False)
+    # selects the name of all features that have an id matched with
+    # the given race id in the RaceFeature table
+    feature = sql_connect('SELECT name FROM Feature WHERE id IN'
+                          '(SELECT fid FROM RaceFeature WHERE rid=?)', (id,))
     if race:
+        # renders race.html and make the title equal to the name of the
+        # choosen race
         return render_template("race.html", title=race[1], race=race,
                                feature=feature)
     else:
@@ -92,7 +106,8 @@ def race(id):
 
 @app.route('/all_equipment')
 def all_equipment():
-    # renders all_equipment.html using information from Equipment table
+    # renders all_equipment.html using information from the Equipment table so
+    # that I only grab the information that will be used
     equipment = sql_connect('SELECT * FROM Equipment')
     return render_template("all_equipment.html", title="Equipment",
                            equipment=equipment)
@@ -100,16 +115,16 @@ def all_equipment():
 
 @app.route('/equipment/<int:id>')
 def equipment(id):
-    # renders equipment.html using information from Equipment
-    # and EquipmentCategory table
-    conn = sqlite3.connect('DnD.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Equipment WHERE id=?', (id,))
-    equipment = cur.fetchone()
-    cur.execute('SELECT name FROM EquipmentCategory WHERE id ='
-                '(SELECT Category FROM Equipment WHERE id=?)', (id,))
-    category = cur.fetchall()
+    # only grabs necessary information from database for choosen equipment
+    equipment = sql_connect('SELECT * FROM Equipment WHERE id=?', (id,), False)
+    # selects the name of the equipmentcategory that has an id matched with
+    # the Category from the choosen equipment
+    category = sql_connect('SELECT name FROM EquipmentCategory WHERE id ='
+                           '(SELECT Category FROM Equipment WHERE id=?)',
+                           (id,))
     if equipment:
+        # renders equipment.html and make the title equal to the name of the
+        # choosen equipment
         return render_template("equipment.html", title=equipment[1],
                                equipment=equipment, category=category)
     else:
@@ -118,7 +133,8 @@ def equipment(id):
 
 @app.route('/all_schools')
 def all_schools():
-    # renders all_schools.html using information from School table
+    # renders all_school.html using information from the school table so
+    # that I only grab the information that will be used
     school = sql_connect('SELECT * FROM School')
     return render_template("all_schools.html", title="Spell Schools",
                            school=school)
@@ -126,14 +142,12 @@ def all_schools():
 
 @app.route('/school/<int:id>')
 def school(id):
-    # renders school.html using information from spell and school table
-    conn = sqlite3.connect('DnD.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Spell WHERE school=?', (id,))
-    spell = cur.fetchall()
-    cur.execute('SELECT * FROM School WHERE id=?', (id,))
-    school = cur.fetchone()
+    # only grabs necessary information from database for choosen school
+    spell = sql_connect('SELECT * FROM Spell WHERE school=?', (id,))
+    school = sql_connect('SELECT * FROM School WHERE id=?', (id,), False)
     if school:
+        # renders school.html and make the title equal to the name of the
+        # choosen school
         return render_template("school.html", title=school[1], school=school,
                                spell=spell)
     else:
@@ -142,15 +156,15 @@ def school(id):
 
 @app.route('/spell/<int:id>')
 def spell(id):
-    # renders spell.html using information from spell and school table
-    conn = sqlite3.connect('DnD.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Spell WHERE id=?', (id,))
-    spell = cur.fetchone()
-    cur.execute('SELECT id FROM School WHERE id='
-                '(SELECT school FROM Spell where id=?)', (id,))
-    school = cur.fetchone()
+    # only grabs necessary information from database for choosen spell
+    spell = sql_connect('SELECT * FROM Spell WHERE id=?', (id,), False)
+    # selects the name of the school that has an id matched with
+    # the school from the choosen spell
+    school = sql_connect('SELECT name FROM School WHERE id='
+                         '(SELECT school FROM Spell where id=?)', (id,), False)
     if spell:
+        # renders spell.html and make the title equal to the name of the
+        # choosen spell
         return render_template("spell.html", title=spell[1], school=school,
                                spell=spell)
     else:
@@ -159,7 +173,8 @@ def spell(id):
 
 @app.route('/all_features')
 def all_features():
-    # renders all_feature.html using information from Feature table
+    # renders all_feature.html using information from the Feature table so
+    # that I only grab the information that will be used
     features = sql_connect('SELECT * FROM Feature')
     return render_template("all_features.html", title="Features",
                            features=features)
@@ -167,12 +182,16 @@ def all_features():
 
 @app.route('/feature/<int:id>')
 def feature(id):
+    # only grabs necessary information from database for choosen feature
     # renders feature.html using information from Feature table
-    conn = sqlite3.connect('DnD.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Feature WHERE id=?', (id,))
-    features = cur.fetchone()
+    # conn = sqlite3.connect('DnD.db')
+    # cur = conn.cursor()
+    # cur.execute('SELECT * FROM Feature WHERE id=?', (id,))
+    # features = cur.fetchone()
+    features = sql_connect('SELECT * FROM Feature WHERE id=?', (id,), False)
     if features:
+        # renders feature.html and make the title equal to the name of the
+        # choosen feature
         return render_template("feature.html", title=features[1],
                                features=features)
     else:
@@ -181,16 +200,22 @@ def feature(id):
 
 @app.route('/search')
 def search():
-    # renders search.html using information from all tables
-    feature = sql_connect('SELECT * FROM Feature')
-    group = sql_connect('SELECT * FROM Class')
-    equipment = sql_connect('SELECT * FROM Equipment')
-    race = sql_connect('SELECT * FROM Race')
-    school = sql_connect('SELECT * FROM School')
-    spell = sql_connect('SELECT * FROM Spell')
+    # renders search.html using id and name from all tables so only the
+    # information needed to create links to each information page is
+    feature = sql_connect('SELECT id, name FROM Feature')
+    group = sql_connect('SELECT id, name FROM Class')
+    equipment = sql_connect('SELECT id, name FROM Equipment')
+    race = sql_connect('SELECT id, name FROM Race')
+    school = sql_connect('SELECT id, name FROM School')
+    spell = sql_connect('SELECT id, name FROM Spell')
     return render_template("search.html", title="Search", group=group,
                            feature=feature, equipment=equipment, race=race,
                            school=school, spell=spell)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html", title="Error 404"), 404
 
 
 # Runs app

@@ -2,9 +2,10 @@
 {% block content %}
 
 <h2 class="search_title">Search Filter</h2>
+{#Creates textbox input#}
 <input type="text" id="myInput" maxlength="25" onkeyup="myFunction()" placeholder="Search...">
 
-{#Creates links to all informative pages#}
+{#Creates links to all informative pages and adds them to list#}
 <ul id="myUL">
     {%for item in group%} 
     <li><a class="search" href="/class/{{item[0]}}">{{item[1]}}</a></li>
@@ -28,7 +29,7 @@
     <li><a class="search" href="/character">Character Creator</a></li>
 </ul>
 
-{# created search filter that shows all above pages that name matches the input #}
+{#removes all links from the list that do not match textbox input#}
 <script>
 function myFunction() {
     var input, filter, ul, li, a, i, txtValue;
@@ -48,6 +49,6 @@ function myFunction() {
 }
 </script>
 
-  {# Script from W3schools (https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_list)  #}
+  {#Script from W3schools (https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_list) #}
 
 {% endblock %}

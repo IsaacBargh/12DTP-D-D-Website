@@ -2,6 +2,8 @@
 
 body{
     font-family:Arial;
+    text-align: justify;
+    text-justify: inter-word;
     background-color: rgb(223, 223, 223);
     margin: 0;
     font-size: 100%;
@@ -48,35 +50,38 @@ footer{
     color: whitesmoke;
     border-color: #ddd;
     font-family:"Arial";
-    user-select: none;
+    user-select: none;  
     border-radius: 15px;
-    width:10%;
-    transition: 0.2s;
+    width:15%;
     font-size: 20px;
+    margin-left: 100%;
+    font-weight: bold;
+    /*makes button slowly change from original to hover*/
+    transition: 0.2s;
 }
 
 .back:hover{
     background-color: rgb(226, 226, 226);
     color: black;
-    border-radius: 15px;
 }
 
 .back_error{
-    background-color: whitesmoke;
-    border-color: #ddd;
-    font-family:"Comic Sans MS";
+    background-color: firebrick;
+    color: whitesmoke;
     user-select: none;
-    border-radius:7px;
-    width:10%;
+    border-radius:15px;
+    width:30%;
+    font-size: 200%;
     transition: 0.2s;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
+
 .back_error:hover{
     background-color: rgb(226, 226, 226);
-    border-radius: 15px;
+    color: firebrick;
 }
 
 hr{
@@ -86,6 +91,7 @@ hr{
 
 .all_link_container {
     display: grid;
+    /*creates two columns of even width*/
     grid-template-columns: 50% 50%;
     gap: 10px;
 }
@@ -118,6 +124,7 @@ hr{
 
 .all_list_container {
     display: grid;
+    /*creates 3 colums with even width*/
     grid-template-columns: 32% 32% 32%;
     column-gap: 2%;
 }
@@ -160,9 +167,11 @@ nav{
     border-width: 1px;
     border-color: rgb(60, 20, 20);
     text-align: center;
+    /*aligns links to center*/
     display: block;
     margin-left: auto;
     margin-right: auto;
+    /**/
     user-select: none;
     transition: .5s;
     }
@@ -203,12 +212,14 @@ nav{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    pointer-events: none;
     height: 300px;
 }
 
 .right_img{
     float: right;
-    height: 500px
+    height: 500px;
+    pointer-events: none;
 }
 
 .home_img{
@@ -216,6 +227,7 @@ nav{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    pointer-events: none;
 }
 
 .home_right_img{
@@ -225,6 +237,7 @@ nav{
     border: rgb(60, 20, 20);
     border-style: solid;
     border-width: 10px;
+    pointer-events: none;
 }
 
 .home_left_img{
@@ -236,14 +249,17 @@ nav{
     border-style: solid;
     border-width: 10px;
     margin-right: 10px;
+    pointer-events: none;
 }
 
 .logo{
     height: 70px;
+    pointer-events: none;
 }
 
 .search_img{
     width: 14px;
+    pointer-events: none;
 }
 
 /* Search */
@@ -278,10 +294,10 @@ nav{
 }
 
 #myInput{
-  width: 50%;   
+  width: 49.3%;   
   font-size: 100%;
   padding-block: 0.5%;
-  margin-left: 27%;
+  margin-left: 27.6%;
 }       
 
 /* character */
@@ -301,6 +317,7 @@ th, td {
   border: 1px solid black;
 }   
 
+/*alternates background colour for table*/
 tr:nth-child(odd) {
     background-color: whitesmoke;
   }
@@ -314,3 +331,13 @@ tr:nth-child(even) {
 }
 
 /* alternating background colour from https://www.digitalocean.com/community/tutorials/how-to-style-a-table-with-css */
+
+
+/* Error 404 */
+.error404{
+    color:firebrick;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 500%;
+    margin: 0%;
+}

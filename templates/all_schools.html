@@ -2,11 +2,13 @@
 {% block content %}
 <h1 class="title">Spell Schools</h1>
 <hr>
+{#Puts all links in a single container so that it can be styled using grid#}
 <div class="all_list_container">
     {%for item in school%}
+    {#Puts all name and summary in a single container so they are displayed in the same grid section#}
     <div>
     <h3>
-        <!--Creats link to school page matching id-->
+        {#Creates link to school page matching id#}
         <a class="all_link_list" href= "/school/{{item[0]}}">
         {{item[1]}}
         </a>

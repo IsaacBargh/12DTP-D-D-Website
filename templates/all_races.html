@@ -2,19 +2,20 @@
 {% block content %}
 <h1 class="title">Races</h1>
 <hr>
+{#Puts all links in a single container so that it can be styled using grid#}
 <div class="all_link_container">
     {%for species in race%}
+    {#Puts name, image and summary in a container for each race so that it can be styled #}
     <div class="all_link_item">
+        {#makes name, image and summary link to race page matching id#}
         <a class = "all_link_grid" href = "/race/{{species[0]}}">
             <img class="all_img" src="/{{species[3]}}">
-        <h3 class="all_name">
+            <h3 class="all_name">
             {{species[1]}}
-        </h3>
-        <P class="center">{{species[4]}}</P>
+            </h3>
+            <P class="center">{{species[4]}}</P>
         </a>
     </div>
-
     {%endfor%}
 </div>
-
 {% endblock %}
